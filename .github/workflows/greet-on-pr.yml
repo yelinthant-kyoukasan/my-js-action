@@ -1,0 +1,27 @@
+name: Greet on PR
+on:
+  pull_request:
+    types: [opened]
+
+permissions:
+  pull-requests: write
+
+jobs:
+  greet-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/greeter
+        id: greet
+        with:
+          name: ${{ github.actor }}
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body: `${process.env.GREETING}`
+            });
+        env:
+          GREETING: ${{ steps.greet.outputs.greeting }}
