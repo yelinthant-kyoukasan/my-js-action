@@ -22,5 +22,5 @@ jobs:
     needs: greet
     runs-on: ubuntu-latest
     steps:
-      - run: echo "The first job said: ${{ needs.greet.outputs.greeting }}" 
+      - run: echo "The first job said= ${{ needs.greet.outputs.greeting }}" 
 
