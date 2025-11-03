@@ -1,0 +1,20 @@
+name: Test Greeter Action
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run custom greeter
+        id: greet
+        uses: ./.github/actions/greeter
+        with:
+          name: "SP SoC"
+
+      - name: Display greeting output
+        run: echo "Output: ${{ steps.greet.outputs.greeting }}" 

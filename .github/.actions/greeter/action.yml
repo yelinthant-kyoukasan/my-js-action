@@ -1,0 +1,13 @@
+name: "Greeter JS Action"
+description: "Prints a greeting and sets an output"
+inputs:
+  name:
+    description: "Name to greet"
+    required: false
+    default: "world"
+outputs:
+  greeting:
+    description: "The greeting message"
+runs:
+  using: "node20"
+  main: "index.js"
